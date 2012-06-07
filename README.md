@@ -1,7 +1,7 @@
 repilog
 =======
 
-Reopenable Pipped Logging is a very simple program to facilitate Apache log rotation.
+Reopenable Piped Logging is a very simple program to facilitate Apache log rotation.
 
 Motivation
 ----------
