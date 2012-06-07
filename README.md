@@ -15,7 +15,7 @@ First method is by far the most common, but it must call graceful restart (http:
 
 Apache provides rotatelogs (http://httpd.apache.org/docs/2.2/programs/rotatelogs.html) tool for that. It works but has 2 disadvantages:
 
-* Rotation period is configured at Apache's httpd.conf, thus, Apache must be disturbed in order to alter rotation periodicity.
+* Rotation period is configured at Apache's `httpd.conf`, thus, Apache must be disturbed in order to alter rotation periodicity.
 * It always use a different suffix for each file name, which can be very tedious to the system administrator.
 
 Apache also recommends Cronolog (http://www.cronolog.org/), but the project have not been updated in a while, and it also has the above limitations. 
@@ -28,20 +28,20 @@ How to use it
 repilog can be used in the same fashion as rotatelogs or cronolog along with Apache. Main differences are:
 
 * It will always use the same file name for logging.
-* It will close(2) and open(2) the log file upon receiving SIGUSR1.
+* It will `close(2)` and `open(2)` the log file upon receiving `SIGUSR1`.
 
-You must add to your httpd.conf, a line similar to:
+You must add to your `httpd.conf`, a line similar to:
 
-CustomLog  "|/opt/repilog/bin/repilog /var/opt/httpd22/log/access.log" default
+`CustomLog  "|/opt/repilog/bin/repilog /var/opt/httpd22/log/access.log" default`
 
 Rotation can be done with:
 
 * Rename log file.
-* Send SIGUSR1 to repilog.
+* Send `SIGUSR1` to repilog.
 * Wait for the new file (with original name) to be created.
 * gzip old log file.
 
-The command below, can be used to find child repilog process from Apache, and send SIGUSR1 only to them:
+The command below, can be used to find child repilog process from Apache, and send `SIGUSR1` only to them:
 
 `/usr/bin/pkill -USR1 -g "$(cat /var/opt/httpd22/run/httpd22.pid)" repilog`
 
