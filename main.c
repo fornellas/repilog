@@ -25,7 +25,7 @@ char *logpath;
 // open log file
 void
 openlog(){
-  if(-1==(logfd=TEMP_FAILURE_RETRY(open(logpath, O_WRONLY|O_APPEND|O_CREAT|O_NOFOLLOW, 0644)))){
+  if(-1==(logfd=TEMP_FAILURE_RETRY(open(logpath, O_WRONLY|O_APPEND|O_CREAT, 0644)))){
     perror("Unable to open log file");
     exit(1);
   }
