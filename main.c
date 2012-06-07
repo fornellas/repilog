@@ -85,12 +85,11 @@ main (int argc, char ** argv) {
       if(r!=w){
         fprintf(stderr, "Warning: Error writing to log file: expected %d size write, got only %d.\n", w, r);
       }
-    }
     // EOF
-    if(0==r)
+    } else if(0==r) {
       exit(0);
     // error reading
-    if(-1==r){
+    } else if(-1==r){
       perror("Error reading stdin");
       exit(1);
     }
