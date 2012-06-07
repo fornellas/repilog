@@ -46,6 +46,7 @@ int
 main (int argc, char ** argv) {
   char buffer[BUFFSIZE];
   int r;
+  sigset_t s;
 
   // command line
   if(2!=argc){
@@ -62,6 +63,8 @@ main (int argc, char ** argv) {
     fprintf(stderr, "Error caling signal(2).\n");
     exit(1);
   };
+  sigemptyset(&s);
+  sigaddset(&s, SIGUSR1);
 
   // read data
   for(;;) {
@@ -70,10 +73,8 @@ main (int argc, char ** argv) {
     // data read
     if(r>0){
       int w;
-      sigset_t s;
+
       // write with signal delayed
-      sigemptyset(&s);
-      sigaddset(&s, SIGUSR1);
       sigprocmask(SIG_BLOCK, &s, NULL);
       w=TEMP_FAILURE_RETRY(write(logfd, (const void *)buffer, r));
       sigprocmask(SIG_UNBLOCK, &s, NULL);
