@@ -11,7 +11,7 @@ Apache has two ways of managing log rotation:
 * Rename, graceful and gzip (http://httpd.apache.org/docs/2.2/logs.html#rotation).
 * Piped logs, and let other tool handle log rotation (http://httpd.apache.org/docs/2.2/logs.html#piped).
 
-First method is by far the most common, but it must call graceful restart (http://httpd.apache.org/docs/2.2/stopping.html#graceful). This will make Apache restart all children processes, and can be an issue on very busy sites. The second method, do not have this issue, but is as good as the external tool is.
+First method is by far the most common, but it must call graceful restart (http://httpd.apache.org/docs/2.2/stopping.html#graceful). This will make Apache restart all children processes, and can be an issue on very busy sites. The second method, does not have this issue, but is as good as the external tool is.
 
 Apache provides rotatelogs (http://httpd.apache.org/docs/2.2/programs/rotatelogs.html) tool for that. It works but has 2 disadvantages:
 
